@@ -1,0 +1,11 @@
+Hola Verónica
+
+Te adjunto este escrito para informate que el error crítico que me da netbeans no he conseguido quitarlo ni con 3 reinstalaciones, pero he acabao (o eso al menos creo) la aplicación la he probado y no me genera ningún error al ejecutarla y todas las funcionalidades en principio están bien.
+
+También he desistanlado y reinstalado java pero aún así persiste el problema, lo único que se me ocurre es reinstalar windows pero eso ha dia de hoy no es factible por falta de tiempo además de querer probar si el portatil me permite instalar MacOs Monterrey o inferior y a malas instalare 
+Ubuntu cuando pueda comprar el nuevo disco duro de 2T M2 que valen una fortuna.
+
+La librería usada de QTJambi es la 4.8.7
+Adjunto el archivo jar con la imágenes del proyecto.
+
+En definitiva, a mi el programa me funciona a la perfección quitando el problema del error crítico que me genera con las versiones de JAVA.
