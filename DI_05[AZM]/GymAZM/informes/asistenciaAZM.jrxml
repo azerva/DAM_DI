@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="asistenciaAZM" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="23e90f5b-cf07-4d9b-ad72-ea6e850a2276">
+	<property name="ireport.zoom" value="1.9487171000000019"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="desde" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hasta" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT *
+FROM clientes as c,sesiones as s, entrenamiento as e
+WHERE c.idcliente = s.idCliente   AND e.idEntrenamiento=s.idEntrenamiento AND c.idCliente BETWEEN $P{desde} AND $P{hasta}
+order by C.idCliente, S.idCliente;]]>
+	</queryString>
+	<field name="idCliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TipoCliente" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Telefono" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idSesion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idEntrenamiento" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horaInicio" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="horaFin" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tipoEntrenamiento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sala" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioSesion" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="precioSesion_1" class="java.lang.Double" resetType="Group" resetGroup="cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{precioSesion}]]></variableExpression>
+	</variable>
+	<variable name="precios_sesion2" class="java.lang.Double" resetType="Group" resetGroup="cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{precioSesion}]]></variableExpression>
+	</variable>
+	<group name="cliente" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{idCliente}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<staticText>
+					<reportElement x="0" y="0" width="207" height="20" uuid="e4c2a91a-e7d6-47bc-8dac-d29abe54ea85"/>
+					<text><![CDATA["Nº de CLIENTE: "+$F{idCliente}]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<staticText>
+					<reportElement mode="Opaque" x="216" y="0" width="251" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="3be1832e-8b3b-49f8-a4be-74cf41b7dcc1"/>
+					<textElement>
+						<font fontName="Comic Sans MS" size="10" isBold="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[Número de sesiones a las que ha asistido el cliente:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="303" y="30" width="145" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0ce909cb-a779-4cce-9bc2-5b4ee68264be"/>
+					<textElement>
+						<font fontName="Comic Sans MS" size="10" isBold="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[IMPORTE TOTAL ABONADO:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="541" y="30" width="14" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0b575f24-007b-4c84-a0ed-2e59ea40ece0"/>
+					<textElement>
+						<font fontName="Comic Sans MS" size="10" isBold="false" isStrikeThrough="false"/>
+					</textElement>
+					<text><![CDATA[€]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="467" y="0" width="88" height="20" uuid="9412984b-3542-431f-8823-46c80c71207a"/>
+					<textFieldExpression><![CDATA[$V{cliente_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="448" y="30" width="93" height="20" uuid="bceac037-554a-487c-a7d1-c6eb94c6bba0"/>
+					<textFieldExpression><![CDATA[$V{precioSesion_1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="140" y="30" width="100" height="20" uuid="e7a15b83-50d5-45b1-a0e8-f528000abd42"/>
+					<textFieldExpression><![CDATA[$V{precios_sesion2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="7" y="10" width="100" height="20" uuid="b7d48e2f-a454-4f88-91ae-81f79874df9d"/>
+					<textFieldExpression><![CDATA[$V{cliente_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="4" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="169" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="137" width="555" height="20" forecolor="#FFFFFF" backcolor="#CC0000" uuid="6ae23355-3994-40a9-bf98-f23c9a450892"/>
+				<box>
+					<pen lineColor="#FF0033"/>
+					<topPen lineColor="#FF0033"/>
+					<leftPen lineColor="#FF0033"/>
+					<bottomPen lineColor="#FF0033"/>
+					<rightPen lineColor="#FF0033"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe sobre asistencia a sesiones de entrenamiento por cliente]]></text>
+			</staticText>
+			<image>
+				<reportElement x="158" y="0" width="201" height="125" uuid="b5d76eff-7426-4bf2-acb6-85b0ddf26ea0"/>
+				<imageExpression><![CDATA["imagenes\\logogym.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="107" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="207" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="9dcfb8de-f9d2-48dd-a9ce-3a5724fec229"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA["Nº de CLIENTE:"+$F{idCliente}]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="369" y="0" width="98" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="a396afd2-39b8-4e27-a946-cd650bb0a41a"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Tipo de Cliente: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="41" width="149" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="21048b46-2497-4d4a-8c80-6c211bdbb95d"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE Y APELLIDOS:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="369" y="41" width="60" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="addd04d0-e5ce-4f42-a81b-7fb497bb22e0"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Teléfono:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="81" width="53" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="9fe2cfcd-93e3-4761-a82a-830e5650c9fc"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Nº Sesión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="68" y="81" width="105" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="07dd28ad-e043-475b-8366-9e41c90b8c39"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Tipo Entrenamiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="183" y="81" width="24" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d41ba2db-6e2d-4f68-bd86-78ee7c40f767"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Sala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="303" y="82" width="32" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="fa7d0817-9799-49fd-8867-4c33af3cfa5a"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="369" y="81" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a5bb066e-0b2f-4f46-9734-48e15572ffb7"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Hora Inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="441" y="81" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="15c88e50-700d-4b3c-b690-39406264273c"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Hora Fin]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="503" y="81" width="41" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="f457f76c-e34e-4c3d-8064-d7da02ad8762"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="10" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Importe]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="0" width="74" height="20" uuid="0bd48ade-c02d-4949-b11f-a6f56604d374"/>
+				<textFieldExpression><![CDATA[$F{TipoCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="441" y="41" width="100" height="20" uuid="a8e25d78-65cc-4364-9720-d0174c9dc71b"/>
+				<textFieldExpression><![CDATA[$F{Telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="41" width="200" height="20" uuid="d8d545f7-cce7-4b8a-8cf8-2de40a8ad364"/>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="100" height="20" uuid="e05614a4-e67b-4fb1-8a5a-dcbacbbbf631"/>
+				<textFieldExpression><![CDATA[$F{idCliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="35" height="20" uuid="93e6ca0f-ee7d-4e21-a045-da77bc10ac78"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{idSesion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="100" height="20" uuid="ff230799-0c40-46af-b142-7d7143475e2b"/>
+				<textFieldExpression><![CDATA[$F{tipoEntrenamiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement x="183" y="0" width="100" height="20" uuid="2ce03594-0a7f-4087-b431-a0645534fe5b"/>
+				<textFieldExpression><![CDATA[$F{sala}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="283" y="0" width="75" height="20" uuid="21ba0d3f-8cfc-4ce6-979f-f0b2a6d393d4"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="367" y="0" width="64" height="20" uuid="57140530-5132-43d9-a504-97566f98c3bb"/>
+				<textFieldExpression><![CDATA[$F{horaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="441" y="0" width="62" height="20" uuid="2b6a30e5-4606-4aa6-9a57-ecbcd4cc72be"/>
+				<textFieldExpression><![CDATA[$F{horaFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="503" y="0" width="52" height="20" uuid="900379a6-92e3-4f69-907d-c7f0c5bcdc7f"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{precioSesion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="16" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="470" splitType="Stretch">
+			<stackedBar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="470" uuid="3ca5b706-3d5b-41f2-96a0-bcfa149f952c"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{Nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Nombre}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{precioSesion_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+		</band>
+	</summary>
+</jasperReport>
